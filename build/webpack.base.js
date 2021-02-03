@@ -37,27 +37,41 @@ const webpackConfig = (webpackDev) => {
         },
         {
           test: /\.js$/,
-          loader: 'babel-loader',
           include: AppPath,
           exclude: /node_modules/,
-          options: {
-            presets: [
-              [
-                '@babel/preset-env',
-                {
-                  useBuiltIns: 'usage', // 会根据配置的浏览器兼容，以及你代码中用到的 API 来进行 polyfill，按需加载
-                  targets: {
-                    browsers: '> 0.25%, last 2 versions, not dead, not ie <= 8',
-                  },
-                  corejs: {
-                    version: 3,
-                    proposals: true, // 提案
-                  },
-                },
-              ],
-              '@vue/babel-preset-app',
-            ],
-          },
+          use: [
+            {
+              loader: 'thread-loader',
+              options: {
+                workers: 8,
+                workerParallelJobs: 50,
+                workerNodeArgs: ['--max-old-space-size=2048'],
+                poolRespawn: false,
+                name: 'vue-pool',
+              },
+            },
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: [
+                  [
+                    '@babel/preset-env',
+                    {
+                      useBuiltIns: 'usage', // 会根据配置的浏览器兼容，以及你代码中用到的 API 来进行 polyfill，按需加载
+                      targets: {
+                        browsers: '> 0.25%, last 2 versions, not dead, not ie <= 8',
+                      },
+                      corejs: {
+                        version: 3,
+                        proposals: true, // 提案
+                      },
+                    },
+                  ],
+                  '@vue/babel-preset-app',
+                ],
+              },
+            },
+          ],
         },
         {
           test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.svg$/],
