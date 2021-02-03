@@ -1,12 +1,16 @@
 {
   "name": "kiter-vue-cli",
-  "version": "1.0.9",
+  "version": "1.1.0-beta",
   "description": "vue 脚手架",
   "main": "index.js",
   "author": "kiter",
   "license": "MIT",
   "bin": {
     "vue-scripts": "./bin/vue-scripts.js"
+  },
+  "scripts": {
+    "pub": "npm publish",
+    "pub-beta": "npm publish --tag=beta"
   },
   "keywords": [
     "vue",
