@@ -23,7 +23,10 @@ portfinder
         return console.log(logSymbols.error, chalk.red(err))
       }
       const url = `http://${dev.host}:${port}`
-      open(url)
+      console.log(chalk.cyan('正在启动开发服务...\n'))
+      open(url).then((res) => {
+        console.log(logSymbols.success, chalk.cyan(`开发服务已在 ${url} 启动`))
+      })
     })
   })
   .catch((err) => {
