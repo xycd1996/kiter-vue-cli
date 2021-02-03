@@ -15,7 +15,7 @@ switch (scripts) {
     concurrently([{ command: `node ${require.resolve('../scripts/start')}`, name: 'dev-server' }])
     break
   case 'build':
-    const spinner = ora('正在打包编译中...').start()
+    const spinner = ora('正在打包编译中...\n').start()
 
     concurrently([{ command: `node ${require.resolve('../scripts/build')}`, name: 'build' }])
       .then(() => spinner.succeed('打包完成'))
