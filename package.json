@@ -1,6 +1,6 @@
 {
   "name": "kiter-vue-cli",
-  "version": "1.1.1-beta.4",
+  "version": "1.1.1",
   "description": "vue 脚手架",
   "main": "index.js",
   "author": "kiter",
