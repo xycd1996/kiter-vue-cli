@@ -1,5 +1,5 @@
 const { HtmlPath, OutPutPath, EntryPath, AppPath } = require('../config/paths')
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
@@ -26,7 +26,7 @@ const webpackConfig = (webpackDev) => {
       rules: [
         {
           test: /\.vue$/,
-          loader: 'vue-loader',
+          use: ['cache-loader', 'vue-loader'],
           include: AppPath,
         },
         {
@@ -50,6 +50,7 @@ const webpackConfig = (webpackDev) => {
                 name: 'vue-pool',
               },
             },
+            'cache-loader',
             {
               loader: 'babel-loader',
               options: {
